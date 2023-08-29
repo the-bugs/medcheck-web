@@ -9,6 +9,9 @@ export default function Header() {
   function handleOpenMenu() {
     setIsOpen(!isOpen);
   }
+  function handleCloseMenu(){
+    setIsOpen(false);
+  }
   return (
     <header>
       {/* mobile navbar */}
@@ -34,16 +37,16 @@ export default function Header() {
               </button>
             <ul className="flex flex-col h-screen w-screen items-center justify-center">
               <li className="my-4">
-                <Link to="/exams">Exames</Link>
+                <Link to="/exams" onClick={handleCloseMenu}>Exames</Link>
               </li>
               <li className="my-4">
-                <Link to="/contact">Contato</Link>
+                <Link to="/contact" onClick={handleCloseMenu}>Contato</Link>
               </li>
               <li className="my-4">
-                <Link to="/login">Login</Link>
+                <Link to="/login" onClick={handleCloseMenu}>Login</Link>
               </li>
               <li className="my-4">
-                <Link to="/signup">Sign Up</Link>
+                <Link to="/signup" onClick={handleCloseMenu}>Sign Up</Link>
               </li>
             </ul>
           </>
