@@ -1,0 +1,9 @@
+{
+  // Configurações do Prettier
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.tabSize": 4, // Define o espaçamento para 4 espaços
+  "editor.insertSpaces": true,
+
+  "eslint.validate": ["javascript", "javascriptreact"]
+}
