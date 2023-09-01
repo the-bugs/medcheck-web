@@ -4,7 +4,20 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        lato: ["Lato", "sans-serif"],
+      },
+      keyframes:{
+        'translate-top':{
+          '0%':{transform:'translateY(2px)'},
+          '100%':{transform:'translateY(-50%)'}
+        },
+      },
+      animation:{
+        'translate-top':'translate-top 0.5st'
+      }
+    },
   },
   plugins: [],
 }
