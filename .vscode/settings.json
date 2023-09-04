@@ -4,6 +4,6 @@
   "editor.formatOnSave": true,
   "editor.tabSize": 4, // Define o espaçamento para 4 espaços
   "editor.insertSpaces": true,
-
+  "editor.autoIndent": "full",
   "eslint.validate": ["javascript", "javascriptreact"]
 }
