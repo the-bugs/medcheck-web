@@ -7,15 +7,16 @@ module.exports = {
     extend: {
       fontFamily: {
         lato: ["Lato", "sans-serif"],
+        heebo: ["Heebo", "sans-serif"],
       },
-      keyframes:{
-        'translate-top':{
-          '0%':{transform:'translateY(2px)'},
-          '100%':{transform:'translateY(-50%)'}
+      keyframes: {
+        'translate-top': {
+          '0%': { transform: 'translateY(2px)' },
+          '100%': { transform: 'translateY(-50%)' }
         },
       },
-      animation:{
-        'translate-top':'translate-top 0.5st'
+      animation: {
+        'translate-top': 'translate-top 0.5s ease-in-out'
       }
     },
   },
