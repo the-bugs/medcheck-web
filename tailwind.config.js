@@ -17,6 +17,14 @@ module.exports = {
       },
       animation: {
         'translate-top': 'translate-top 0.5s ease-in-out'
+      },
+      colors: {
+        darkBlue: '#0B16D4',
+        mediumDarkBlue: '#0B4FDE',
+        normalBlue: '#137DC7',
+        cyanBlue: '#0BBDDE',
+        greenBlue: '#0BD4BC',
+
       }
     },
   },
