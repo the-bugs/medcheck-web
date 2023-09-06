@@ -3,7 +3,8 @@ import Home from "./pages/Home";
 import "./App.css";
 import Root from "./pages/Root";
 import Login from "./components/Login";
-import SignUp from "./components/SignUp";
+import SignUp from "./pages/SignUp";
+import UiComponents from "./pages/UiComponents";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/uicomponents" element={<UiComponents />} />
         </Route>
       </Routes>
     </BrowserRouter>
