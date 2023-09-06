@@ -1,38 +1,36 @@
 import doc from "../assets/imgs/doctor.jpg";
+import ButtonComponent from "../components/ui/ButtonComponent";
 function Home(): JSX.Element {
   return (
-    <div className="flex justify-center font-lato h-screen p-3">
-      <section className="mt-5 h-5/6 lg:w-5/6 text-center border rounded-md p-6 pt-24 bg-transparent bg-slate-300">
-        <p
-          className="text-lg text-semibold  text-blue-400"
-          aria-label="Uma solução tecnológica para médicos e pacientes"
-        >
-          Uma solução tecnológica para médicos e pacientes
-        </p>
-        <h1
-          className="text-4xl  lg:text-5xl mt-3 mb-5 lg:mb-0  font-bold  text-blue-800"
-          aria-label="Sua plataforma digital de saúde"
-        >
-          <span className="text-blue-900 mr-3">Sua plataforma digital</span>
-          de saúde
-        </h1>
-        <hr className="w-28 mb-10 ml-4 lg:w-max" />
-        <div>
-          <button
-            aria-label="Cadastre-se"
-            type="submit"
-            className=" ml-28 mr-5 h-10 font-semibold bg-white  text-slate-800 border-2 border-slate-900 hover:bg-slate-900 hover:text-white w-24 rounded-lg  "
-          >
-            Cadastre-se
-          </button>
-          <button
-            aria-label="Entrar"
-            className="border-2 h-10 w-24 rounded-lg text-blue-500 border-blue-500 font-semibold hover:text-white hover:bg-blue-950 hover:border-blue-950"
-          >
-            Entrar
-          </button>
+    <div className="flex justify-center h-screen m-2">
+      <section className=" mt-3 h-5/6 lg:w-5/6 text-center  rounded-md p-6 pt-24 md:flex md:justify-center md:content-center">
+        <div className="lg:scale-105 md:w-1/2 md:text-left md:pl-8 md:pb-14 md:pr-16 lg:flex lg:flex-col lg:justify-center ">
+          <p className="text-md font-semibold text-justify  text-slate-400">
+            Uma solução tecnológica para médicos e pacientes
+          </p>
+          <h1 className="text-5xl md:text-justify lg:text-start  lg:text-6xl mt-3 mb-5 lg:mb-0 font-bold  text-blue-700">
+            <span className="text-blue-900 mr-3">Med Check,</span>
+            sua plataforma digital de saúde
+          </h1>
+          <hr className="w-28 ml-4 mb-6 border-blue-800 border-t-2 lg:w-max" />
+          <p className=" mb-10 text-blue-900 font-semibold">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam
+            quaerat veniam dolorem. Consectetur!
+          </p>
+          <div className="sm:flex lg:justify-end">
+            <ButtonComponent className="bg-cyanBlue hover:bg-normalBlue focus-visible:ring-darkMediumBlue">
+              Cadastrar-se
+            </ButtonComponent>
+            <ButtonComponent className="md:block">Entrar</ButtonComponent>
+          </div>
         </div>
-        <img src={doc} alt="Imagem de médico" className=" rounded-md mt-14" />
+        <div className="md:w-1/2 mt-4 md:mt-0">
+          <img
+            src={doc}
+            alt="doctor"
+            className="rounded-full shadow-2xl md:ml-10 lg:ml-0"
+          />
+        </div>
       </section>
     </div>
   );
