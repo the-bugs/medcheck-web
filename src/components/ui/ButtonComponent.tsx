@@ -9,7 +9,6 @@ const variants = cva(
     "my-1",
     "rounded-full",
     "tracking-wider",
-    "transition",
     "cursor-pointer",
     "outline-none",
     "inline-flex",
@@ -28,6 +27,7 @@ const variants = cva(
       variant: {
         primary: [
           "bg-normalBlue",
+          "transition",
           "font-semibold",
           "text-white",
           "hover:bg-mediumDarkBlue",
@@ -36,9 +36,19 @@ const variants = cva(
         secondary: [
           "bg-cyanBlue",
           "font-semibold",
+          "transition",
           "text-white",
           "hover:bg-normalBlue",
           "hover:shadow-xl",
+        ],
+        third: [
+          "bg-white",
+          "text-normalBlue",
+          "font-semibold",
+          "border border-normalBlue",
+          "border-2",
+          "transition",
+          "hover:bg-normalBlue hover:text-white hover:shadow-xl",
         ],
         success: [
           "bg-green-400",
