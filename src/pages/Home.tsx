@@ -3,7 +3,7 @@ import ButtonComponent from "../components/ui/ButtonComponent";
 function Home(): JSX.Element {
   return (
     <div className="flex justify-center h-screen m-2">
-      <section className=" mt-3 h-5/6 lg:w-5/6 text-center  rounded-md p-6 pt-24 md:flex md:justify-center md:content-center">
+      <section className=" mt-3 h-5/6 lg:w-5/6 text-center  rounded-md p-3  pt-20 md:flex md:justify-center md:content-center">
         <div className="lg:scale-105 md:w-1/2 md:text-left md:pl-8 md:pb-14 md:pr-16 lg:flex lg:flex-col lg:justify-center ">
           <p className="text-md font-semibold text-justify  text-slate-400">
             Uma solução tecnológica para médicos e pacientes
@@ -18,10 +18,8 @@ function Home(): JSX.Element {
             quaerat veniam dolorem. Consectetur!
           </p>
           <div className="sm:flex lg:justify-end">
-            <ButtonComponent className="bg-cyanBlue hover:bg-normalBlue focus-visible:ring-darkMediumBlue">
-              Cadastrar-se
-            </ButtonComponent>
-            <ButtonComponent className="md:block">Entrar</ButtonComponent>
+            <ButtonComponent className="">Cadastrar-se</ButtonComponent>
+            <ButtonComponent variant={"third"}>Entrar</ButtonComponent>
           </div>
         </div>
         <div className="md:w-1/2 mt-4 md:mt-0">
