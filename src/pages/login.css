@@ -1,0 +1,59 @@
+/* Fonte */
+body {
+  font-family: "Montserrat", sans-serif;
+  color: #332929;
+}
+
+/* Reset CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  border: none;
+  outline: none;
+  scroll-behavior: smooth;
+}
+
+/* Estilizar o contêiner do formulário */
+.forms {
+  text-align: center;
+  margin: 0 auto;
+  max-width: 400px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  border: 1px solid rgb(181, 158, 184);
+  padding: 10px;
+  margin-bottom: 10px;
+}
+input[type="text"]:focus,
+textarea:focus {
+  border: 3px solid rgb(177, 23, 190);
+}
+
+.forgotPassword {
+  display: flex;
+  justify-content: flex-end;
+  font-size: small;
+  color: rgb(131, 70, 189);
+}
+
+.Login {
+  margin-bottom: 30px;
+  font-size: 34px;
+}
+
+.input {
+  border-radius: 50px;
+}
