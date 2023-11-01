@@ -17,7 +17,7 @@ export default function Header(): JSX.Element {
   }
 
   return (
-    <header>
+    <header className="z-50">
       {/* mobile navbar */}
       <nav className={mobileNavClasses}>
         {!isOpen && (

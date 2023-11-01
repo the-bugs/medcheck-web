@@ -6,8 +6,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        lato: ["Lato", "sans-serif"],
         heebo: ["Heebo", "sans-serif"],
+        mullish: ["Mullish", "sans-serif"],
       },
       keyframes: {
         'translate-top': {
