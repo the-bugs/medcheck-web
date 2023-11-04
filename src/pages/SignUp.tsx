@@ -60,12 +60,12 @@ export default function SignUp() {
       )}
       {isPaciente && (
         <div className="flex justify-center md:w-1/2">
-          <UserRegisterForm />
+          <UserRegisterForm type="paciente"/>
         </div>
       )}
       {isMedico && (
         <div className="flex justify-center">
-          <UserRegisterForm />
+          <UserRegisterForm type="medico"/>
         </div>
       )}
     </div>
