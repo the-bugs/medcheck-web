@@ -8,7 +8,7 @@ import ButtonComponent from "./ui/ButtonComponent";
 export default function Header(): JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
   const mobileNavClasses = `sm:hidden flex justify-between mt-8 mb-8 z-10 ${
-    isOpen ? "fixed mt-28" : ""
+    isOpen ? "fixed mt-0 mb-0" : ""
   }`;
   function handleOpenMenu(): void {
     setIsOpen(!isOpen);
@@ -19,7 +19,7 @@ export default function Header(): JSX.Element {
 
   return (
     <header>
-      {/* mobile navbar */}
+      {/* unopened mobile navbar */}
       <nav className={mobileNavClasses}>
         {!isOpen && (
           <>
@@ -36,7 +36,7 @@ export default function Header(): JSX.Element {
             </button>
           </>
         )}
-
+        {/* opened mobile navbar */}
         {isOpen && (
           <>
             <button
