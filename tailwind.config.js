@@ -7,7 +7,7 @@ module.exports = {
     extend: {
       fontFamily: {
         heebo: ["Heebo", "sans-serif"],
-        mullish: ["Mullish", "sans-serif"],
+        mulish: ["Mulish", "sans-serif"],
       },
       keyframes: {
         'translate-top': {
@@ -19,12 +19,11 @@ module.exports = {
         'translate-top': 'translate-top 0.5s ease-in-out'
       },
       colors: {
-        darkBlue: '#0B16D4',
-        mediumDarkBlue: '#0B4FDE',
-        normalBlue: '#137DC7',
-        cyanBlue: '#0BBDDE',
-        greenBlue: '#0BD4BC',
-
+        backgroundColor1: '#1373B3',
+        primaryBlue: '#1D4ED8',
+        secondaryBlue: '#1373B3',
+        primaryGreen: '#19A23D',
+        textColor: '#17191F',
       }
     },
   },
