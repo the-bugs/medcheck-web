@@ -4,7 +4,7 @@ export default function HeroSection(): JSX.Element {
   return (
     <div className="bg-white bg-opacity-30 flex justify-center">
       <div className="flex flex-col px-5 lg:flex-row ustify-center md:w-full md:p-4 lg:w-8/12 ">
-        <section className="lg:w-3/6 lg:mr-6 self-center lg:mb-10">
+        <section className="lg:w-3/6 lg:mr-6 self-center lg:mb-28">
           <div className="md:flex flex-col">
             <p className="text-textColor opacity-70 lg:w-3/6">
               Uma solução tecnológica para médicos e pacientes
