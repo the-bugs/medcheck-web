@@ -1,11 +1,11 @@
 import ButtonComponent from "../components/ui/ButtonComponent";
 import { Link } from "react-router-dom";
-import techman from "../assets/imgs/techman.png";
+import login_doctor from "../assets/imgs/login_doctor.png";
 export default function Login() {
   return (
     <section id="login" className="flex items-end justify-center lg:gap-[10rem] gap-0 mt-6">
       <div>
-        <img src={techman} alt="techman" className="lg:flex hidden"/>
+        <img src={login_doctor} alt="login_doctor" className="lg:flex hidden"/>
       </div>
       <div className="forms">
         <div className="mb-[34px]">
