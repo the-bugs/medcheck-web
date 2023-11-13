@@ -26,7 +26,14 @@ export default function RegisterForm(props: { type: string }) {
 
   const onSubmit: SubmitHandler<FormData> = (data: FormData) => {
     axios
-      .post("http://localhost:3001/pacientes", data)
+      .post("http://localhost:3001/pacientes", data, {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Headers": "X-Requested-With, content-type",
+          Accept: "*/*",
+          "Content-Type": "application/json",
+        },
+      })
       .then((response) => {
         toast.success("Usuário cadastrado com sucesso!", {
           duration: 2500,
