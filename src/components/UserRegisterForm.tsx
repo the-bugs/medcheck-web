@@ -14,7 +14,7 @@ interface FormData {
   dataNascimento: Date;
 }
 
-export default function RegisterForm(props: { type: string; }) {
+export default function RegisterForm(props: { type: string }) {
   // Adicionar navigate quando o usuário for cadastrado com sucesso
   const navigate = useNavigate();
 
@@ -24,24 +24,16 @@ export default function RegisterForm(props: { type: string; }) {
     formState: { errors },
   } = useForm<FormData>();
 
-  const onSubmit: SubmitHandler<FormData> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<FormData> = (data: FormData) => {
     axios
-      .post(props.type === 'paciente' ? "http://localhost:3001/pacientes" : "http://localhost:3001/medicos", data, {
-       headers:{
-        'Access-Control-Allow-Origin': '*',
-        "Access-Control-Allow-Headers": "X-Requested-With, content-type",
-        'Accept': '*/*',
-        'Content-Type': 'application/json'
-       }
-      })
+      .post("http://localhost:3001/pacientes", data)
       .then((response) => {
         toast.success("Usuário cadastrado com sucesso!", {
           duration: 2500,
           position: "bottom-right",
         });
+        navigate("/home");
         console.log(response.data);
-        navigate('/login');
       })
       .catch((error) => {
         toast.error(`Erro ao cadastrar usuário! : ${error.response.data}`, {
@@ -85,7 +77,7 @@ export default function RegisterForm(props: { type: string; }) {
           <span className="text-red-500 text-sm">Campo obrigatório</span>
         )}
       </div>
-      { props.type === 'paciente' &&
+      {props.type === "paciente" && (
         <div className="cpf mb-4 md:w-1/2">
           <label className=" text-gray-700 my-4" htmlFor="cpf">
             Seu CPF
@@ -101,41 +93,41 @@ export default function RegisterForm(props: { type: string; }) {
             <span className="text-red-500 text-sm">Campo obrigatório</span>
           )}
         </div>
-      }
-      { props.type === 'paciente' &&
+      )}
+      {props.type === "paciente" && (
         <div className="sexo mb-4 md:w-1/2">
-        <label className=" text-gray-700 my-4" htmlFor="sexo">
-          Sexo
-        </label>
-        <input
-          className="appearance-none border-b-2  w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-mediumDarkBlue focus:shadow-outline"
-          type="text"
-          placeholder="sexo"
-          {...register("sexo", { required: true })}
-        />
-  
-        {errors.senha && (
-          <span className="text-red-500 text-sm">Campo obrigatório</span>
-        )}
-      </div>
-      }
-      { props.type === 'paciente' &&
+          <label className=" text-gray-700 my-4" htmlFor="sexo">
+            Sexo
+          </label>
+          <input
+            className="appearance-none border-b-2  w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-mediumDarkBlue focus:shadow-outline"
+            type="text"
+            placeholder="sexo"
+            {...register("sexo", { required: true })}
+          />
+
+          {errors.senha && (
+            <span className="text-red-500 text-sm">Campo obrigatório</span>
+          )}
+        </div>
+      )}
+      {props.type === "paciente" && (
         <div className="dataNascimento mb-4 md:w-1/2">
-        <label className=" text-gray-700 my-4" htmlFor="dataNascimento">
-          Data de Nascimento
-        </label>
-        <input
-          className="appearance-none border-b-2  w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-mediumDarkBlue focus:shadow-outline"
-          type="date"
-          placeholder="data de nascimento"
-          {...register("dataNascimento", { required: true })}
-        />
-  
-        {errors.senha && (
-          <span className="text-red-500 text-sm">Campo obrigatório</span>
-        )}
-      </div>
-      }
+          <label className=" text-gray-700 my-4" htmlFor="dataNascimento">
+            Data de Nascimento
+          </label>
+          <input
+            className="appearance-none border-b-2  w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-mediumDarkBlue focus:shadow-outline"
+            type="date"
+            placeholder="data de nascimento"
+            {...register("dataNascimento", { required: true })}
+          />
+
+          {errors.senha && (
+            <span className="text-red-500 text-sm">Campo obrigatório</span>
+          )}
+        </div>
+      )}
       <div className="senha mb-4 md:w-1/2">
         <label className=" text-gray-700 my-4" htmlFor="senha">
           Sua senha
