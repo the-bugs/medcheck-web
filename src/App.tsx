@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import UiComponents from "./pages/UiComponents";
 import GlobalContext from "./contexts";
+import { Toaster } from "react-hot-toast";
 function App() {
   return (
     <BrowserRouter>
@@ -19,6 +20,7 @@ function App() {
           </Route>
         </Routes>
       </GlobalContext>
+      <Toaster />
     </BrowserRouter>
   );
 }
