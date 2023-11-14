@@ -5,7 +5,6 @@ import { Navigate, useNavigate } from "react-router-dom";
 type User = {
   email: string;
   password: string;
-  token: string | null;
 };
 
 type AuthContextType = {
@@ -35,12 +34,9 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
         `${process.env.REACT_APP_IP}/auth/login`,
         data
       );
-      // Testar se mantém ou não o token
-      const token = response.data.token;
       setUser({
-        email: "",
-        password: "",
-        token: token,
+        email: data.email,
+        password: data.password,
       });
       // Salva no armazenamento local os dados do usuário.
       // Pensar se mantemos ou não o token.
