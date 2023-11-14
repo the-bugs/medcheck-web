@@ -39,14 +39,21 @@ export default function RegisterForm(props: { type: string }) {
           duration: 2500,
           position: "bottom-right",
         });
-        navigate("/home");
-        console.log(response.data);
+        navigate("/");
+        if (response) {
+          console.log(response.data);
+        }
       })
       .catch((error) => {
-        toast.error(`Erro ao cadastrar usuário! : ${error.response.data}`, {
-          duration: 2500,
-          position: "bottom-right",
-        });
+        toast.error(
+          `Erro ao cadastrar usuário! : ${
+            error.response && error.response.data
+          }`,
+          {
+            duration: 2500,
+            position: "bottom-right",
+          }
+        );
       });
   };
 
