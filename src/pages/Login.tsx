@@ -6,15 +6,19 @@ import loginIMG from "../assets/imgs/loginIMG.png";
 import { AuthContext } from "../contexts/AuthContext"; // Replace with the actual path to your AuthContext file
 
 type User = {
+  nome: string;
   email: string;
   password: string;
+  tipo: string;
 };
 
 export default function Login() {
   const authContext = useContext(AuthContext);
   const [formData, setFormData] = useState<User>({
+    nome: "",
     email: "",
     password: "",
+    tipo: "",
   });
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
