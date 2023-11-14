@@ -1,10 +1,12 @@
 import axios from "axios";
-import React, { createContext, useState, ReactNode, useEffect } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import React, { createContext, useState, ReactNode } from "react";
+import { useNavigate } from "react-router-dom";
 
 type User = {
+  nome: string;
   email: string;
   password: string;
+  tipo: string;
 };
 
 type AuthContextType = {
@@ -35,8 +37,10 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
         data
       );
       setUser({
+        nome: data.nome,
         email: data.email,
         password: data.password,
+        tipo: data.tipo,
       });
       // Salva no armazenamento local os dados do usuário.
       // Pensar se mantemos ou não o token.
