@@ -2,16 +2,16 @@ import axios from "axios";
 import React, { createContext, useState, ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 
-type User = {
+type UserType = {
   nome: string;
   email: string;
-  password: string;
+  senha: string;
   tipo: string;
 };
 
 type AuthContextType = {
-  user: User | null;
-  login: (data: User) => void;
+  user: UserType | null;
+  login: (username: string, senha: string) => void;
   logout: () => void;
 };
 
@@ -27,28 +27,35 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
   children,
 }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<UserType | null>(null);
   const navigate = useNavigate();
 
-  const login = async (data: User) => {
+  const login = async (email: string, senha: string) => {
+    const port = "http://localhost:3001/";
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_IP}/auth/login`,
-        data
+        `${port}auth/login`,
+        {
+          email,
+          senha,
+        },
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "X-Requested-With, content-type",
+            Accept: "*/*",
+            "Content-Type": "application/json",
+          },
+        }
       );
-      setUser({
-        nome: data.nome,
-        email: data.email,
-        password: data.password,
-        tipo: data.tipo,
-      });
+      console.log(user);
+      setUser(response.data.user);
       // Salva no armazenamento local os dados do usuário.
       // Pensar se mantemos ou não o token.
-      localStorage.setItem("authToken", response.data.token);
-      localStorage.setItem("userInfo", JSON.stringify(data));
-      navigate("/home");
+      localStorage.setItem("userInfo", JSON.stringify(response.data.user));
+      navigate("/");
     } catch (err) {
-      return err;
+      console.log(err);
     }
   };
 
