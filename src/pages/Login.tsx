@@ -1,43 +1,40 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import ButtonComponent from "../components/ui/ButtonComponent";
 import { Link } from "react-router-dom";
 import loginIMG from "../assets/imgs/loginIMG.png";
 
 import { AuthContext } from "../contexts/AuthContext"; // Replace with the actual path to your AuthContext file
+import { SubmitHandler, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 type User = {
   email: string;
-  password: string;
+  senha: string;
 };
 
 export default function Login() {
   const authContext = useContext(AuthContext);
-  const [formData, setFormData] = useState<User>({
-    email: "",
-    password: "",
-  });
-  const [error, setError] = useState<string | null>(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const onSubmit = async () => {
-    setIsSubmitting(true);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<User>();
+
+  const onSubmit: SubmitHandler<User> = async (data: User) => {
     try {
       if (authContext) {
-        await authContext.login(formData);
+        authContext.login(data.email, data.senha);
       }
-    } catch (error) {
-      setError("Email ou senha inválidos");
-    } finally {
-      setIsSubmitting(false);
+    } catch (error: any) {
+      toast.error(
+        `Erro ao fazer login! : ${error.response && error.response.data}`,
+        {
+          duration: 2500,
+          position: "bottom-right",
+        }
+      );
     }
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
   };
 
   return (
@@ -52,55 +49,54 @@ export default function Login() {
       />
       <form
         className="w-full lg:w-2/3 p-2 md:p-0 text-textColor first-letter:text-opacity-90 max-w-xl"
-        onSubmit={(e) => {
-          e.preventDefault();
-          onSubmit();
-        }}
+        onSubmit={handleSubmit(onSubmit)}
       >
         <h2 className="text-3xl">Bem vindo (a) de volta!</h2>
         <p className="text-base">Insira seus dados</p>
         <div className="flex flex-col mt-14">
-          <label className="text-2xl">Digite seu email</label>
+          <label className="text-2xl" htmlFor="email">
+            Digite seu email
+          </label>
           <input
-            name="email"
-            placeholder="Email"
+            placeholder="nome@email.com"
             className="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-gray-600 block w-full p-2.5 mt-4"
-            type="text"
-            required
-            value={formData.email}
-            onChange={handleInputChange}
+            type="email"
+            {...register("email", { required: true })}
           />
-
-          <label className="text-2xl mt-4">Digite sua senha</label>
+          {errors.email && (
+            <span className="text-red-500 text-sm">Campo obrigatório</span>
+          )}
+          <label className="text-2xl mt-4" htmlFor="senha">
+            Digite sua senha
+          </label>
           <input
-            name="password"
             placeholder="Senha"
             className="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mt-4"
             type="password"
-            required
-            value={formData.password}
-            onChange={handleInputChange}
+            {...register("senha", { required: true })}
           />
-          {error && <p className="text-red-500">{error}</p>}
+          {errors.senha && (
+            <span className="text-red-500 text-sm">Campo obrigatório</span>
+          )}
         </div>
         <Link to="../forgetPassword">
           <p className="text-base mt-4 text-primaryBlue">Esqueceu sua senha?</p>
         </Link>
 
         <div className="flex">
-          <ButtonComponent
-            className="w-full md:w-36 mt-4 rounded-md border-2 border-primaryGreen"
-            variant={"primary"}
-            type="submit"
-            disabled={isSubmitting}
-          >
-            Cadastrar
-          </ButtonComponent>
+          <Link to="/signup">
+            <ButtonComponent
+              className="w-full md:w-36 mt-4 rounded-md border-2 border-primaryGreen"
+              variant={"primary"}
+              type="button"
+            >
+              Cadastrar
+            </ButtonComponent>
+          </Link>
           <ButtonComponent
             className="w-full md:w-36 mt-4 rounded border-2 border-primaryBlue"
             variant={"secondary"}
             type="submit"
-            disabled={isSubmitting}
           >
             Login
           </ButtonComponent>
