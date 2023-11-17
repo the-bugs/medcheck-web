@@ -70,14 +70,14 @@ export default function Login() {
             Digite sua senha
           </label>
           <input
-            name="senha"
             placeholder="Senha"
             className="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mt-4"
             type="password"
+            {...register("senha", { required: true })}
           />
           {errors.senha && (
             <span className="text-red-500 text-sm">Campo obrigatório</span>
-          )}{" "}
+          )}
         </div>
         <Link to="../forgetPassword">
           <p className="text-base mt-4 text-primaryBlue">Esqueceu sua senha?</p>
