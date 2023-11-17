@@ -27,7 +27,7 @@ export default function RegisterForm(props: { type: string }) {
 
   const onSubmit: SubmitHandler<FormData> = (data: FormData) => {
     axios
-      .post("http://localhost:3001/pacientes", data, {
+      .post(`${process.env.REACT_APP_API_HOST}/pacientes`, data, {
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Headers": "X-Requested-With, content-type",
