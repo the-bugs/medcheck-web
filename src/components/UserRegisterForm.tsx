@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import ButtonComponent from "./ui/ButtonComponent";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthContext";
 
 interface FormData {
   nome: string;
@@ -17,7 +18,7 @@ interface FormData {
 export default function RegisterForm(props: { type: string }) {
   // Adicionar navigate quando o usuário for cadastrado com sucesso
   const navigate = useNavigate();
-
+  const authContext = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -39,6 +40,7 @@ export default function RegisterForm(props: { type: string }) {
           duration: 2500,
           position: "bottom-right",
         });
+        if (authContext) authContext.login(data.email, data.senha);
         navigate("/");
         if (response) {
           console.log(response.data);

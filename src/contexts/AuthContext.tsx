@@ -1,25 +1,18 @@
 import axios from "axios";
-import React, { createContext, useState, ReactNode, useEffect } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import React, { createContext, useState, ReactNode } from "react";
+import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
-interface JwtPayload {
-  user_id: string;
-  tipo: string;
-  id_externo: string;
-}
-
-type User = {
-  id?: string;
+type UserType = {
+  nome: string;
   email: string;
-  password: string;
-  tipo?: string;
-  tipoId?: string 
+  tipo: string;
+  user_id: number;
 };
 
 type AuthContextType = {
-  user: User | null;
-  login: (data: User) => void;
+  user: UserType | null;
+  login: (username: string, senha: string) => void;
   logout: () => void;
 };
 
@@ -29,41 +22,35 @@ type AuthContextProviderProps = {
 
 // Contexto para verificação de autenticação.
 //Para deslogado, o usuário é null. Para logado, o usuário é um objeto com nome e email.
-//MAYBE: Implementar token para localStorage.
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
   children,
 }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<UserType | null>(null);
   const navigate = useNavigate();
 
-  const login = async (data: User) => {
+  const login = async (email: string, senha: string) => {
+    const port = "http://localhost:3001/";
     try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_HOST}/auth/login`,
-        {
-          email: data.email,
-          senha: data.password
-        }
-      );
-      const token = response.data.access_token;
-      const userDecoded = jwtDecode(token) as JwtPayload;
       
-      setUser({
-        email: data.email,
-        password: data.password,
-        tipo: userDecoded.tipo,
-        id: userDecoded.user_id,
-        tipoId: userDecoded.id_externo
+      const response = await axios.post(`${port}auth/login`, {
+        email,
+        senha,
       });
+      
       // Salva no armazenamento local os dados do usuário.
-      // Pensar se mantemos ou não o token.
-      localStorage.setItem("authToken", token);
-      localStorage.setItem("userInfo", JSON.stringify(data));
-      navigate("/home");
+      localStorage.setItem("authToken", response.data.access_token);
+      localStorage.setItem("userInfo", JSON.stringify(response.data.user));
+      const token = localStorage.getItem("authToken");
+
+      if (token) {
+        const decodedToken = jwtDecode<any>(token);
+        setUser(decodedToken);
+      }
+      navigate("/");
     } catch (err) {
-      throw err;
+      console.log(err);
     }
   };
 

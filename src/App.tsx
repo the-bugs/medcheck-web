@@ -13,8 +13,8 @@ function App() {
     <BrowserRouter>
       <GlobalContext>
         <Routes>
-            <Route path="/" element={<Root />}>
-            <Route index element={<Home />} />
+          <Route path="/" element={<Root />}>
+            <Route path="/" index element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/uicomponents" element={<ProtectedRoute><UiComponents /></ProtectedRoute>} />
