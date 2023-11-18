@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import mobileIMG from "../assets/imgs/mobile_DoctorSearch.png";
 import desktopIMG from "../assets/imgs/desktop_DoctorSearch.png";
@@ -17,7 +18,7 @@ interface Specialty {
 export default function DoctorSearch(): JSX.Element {
   const {
     register,
-    handleSubmit,
+
     formState: { errors },
   } = useForm<FormData>();
 
@@ -25,6 +26,7 @@ export default function DoctorSearch(): JSX.Element {
     "Selecione especialidade desejada"
   );
   const [specialties, setSpecialties] = useState<Specialty[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function getSpecialties(): Promise<void> {
@@ -45,22 +47,6 @@ export default function DoctorSearch(): JSX.Element {
     }
     getSpecialties();
   }, []);
-
-  const onSubmit: SubmitHandler<FormData> = async ({ searchTerm }) => {
-    try {
-      const response = await axios.get(
-        `http://localhost:3001/especialidades/`,
-        {
-          params: { searchTerm },
-        }
-      );
-      // Faça algo com a resposta (response.data) aqui
-      console.log(response.data);
-    } catch (error) {
-      // Lide com erros de solicitação aqui
-      console.error("Erro na solicitação:", error);
-    }
-  };
 
   return (
     <div className="relative flex flex-col md:flex-col justify-center h-[500px]">
@@ -88,10 +74,7 @@ export default function DoctorSearch(): JSX.Element {
           profissional que mais se aplica às suas necessidades!
         </p>
       </div>
-      <form
-        className="flex md:ml-80 flex-col md:flex-row p-2"
-        onChange={handleSubmit(onSubmit)}
-      >
+      <div className="flex md:ml-80 flex-col md:flex-row p-2">
         <select
           {...register("searchTerm")}
           value={selectedValue}
@@ -113,10 +96,18 @@ export default function DoctorSearch(): JSX.Element {
           variant={"primary"}
           type="button"
           className="md:w-40 w-full h-12 mt-4 mx-0 md:ml-6"
+          onClick={() => {
+            const selectedSpecialty = specialties.find(
+              (specialty) => specialty.name === selectedValue
+            );
+            if (selectedSpecialty) {
+              navigate(`/medicos/especialidades/${selectedSpecialty.id}`);
+            }
+          }}
         >
           Pesquisar
         </ButtonComponent>
-      </form>
+      </div>
     </div>
   );
 }
