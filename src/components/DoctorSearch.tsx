@@ -21,6 +21,9 @@ export default function DoctorSearch(): JSX.Element {
     formState: { errors },
   } = useForm<FormData>();
 
+  const [selectedValue, setSelectedValue] = useState(
+    "Selecione especialidade desejada"
+  );
   const [specialties, setSpecialties] = useState<Specialty[]>([]);
 
   useEffect(() => {
@@ -86,16 +89,18 @@ export default function DoctorSearch(): JSX.Element {
         </p>
       </div>
       <form
-        className="flex md:ml-80 flex-col w-full  md:flex-row p-2"
+        className="flex md:ml-80 flex-col md:flex-row p-2"
         onChange={handleSubmit(onSubmit)}
       >
         <select
           {...register("searchTerm")}
+          value={selectedValue}
+          onChange={(e) => setSelectedValue(e.target.value)}
           className={`w-full h-12 px-2 mt-4 border-2 max-w-xl ${
             errors.searchTerm ? "border-red-500" : "border-gray-200"
           } focus:border-gray-400 rounded`}
         >
-          <option value="" disabled selected>
+          <option disabled value="Selecione especialidade desejada">
             Selecione especialidade desejada
           </option>
           {specialties.map((specialty) => (
