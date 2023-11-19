@@ -33,11 +33,11 @@ export default function DoctorFound(): JSX.Element {
 
   return (
     <div className="md:ml-32">
-      <div className="max-w-xl">
+      <div className="max-w-xl ml-2 md:ml-32">
         <h1 className="text-3xl text-primaryGreen ">
           Pesquise pelo profissional
         </h1>
-        <div className="flex flex-col md:flex-row p-2">
+        <div className="flex flex-col md:flex-row p-1">
           <select
             value={selectedValue}
             onChange={(e) => setSelectedValue(e.target.value)}
@@ -55,7 +55,7 @@ export default function DoctorFound(): JSX.Element {
           <ButtonComponent
             variant={"primary"}
             type="button"
-            className="md:w-40 w-full h-12 mt-4 mx-0 md:ml-6"
+            className="md:w-40 w-full border-2 border-primaryGreen h-12 mt-4 mx-0 md:ml-3"
             onClick={() => {
               const selectedSpecialty = specialties.find(
                 (specialty) => specialty.name === selectedValue
@@ -68,32 +68,34 @@ export default function DoctorFound(): JSX.Element {
             Pesquisar
           </ButtonComponent>
         </div>
+        <h1 className="text-3xl text-primaryGreen my-8">Resultado</h1>
       </div>
-      <h1 className="text-3xl text-primaryGreen my-8">Resultado</h1>
       <div className="grid grid-cols-3 md:w-10/12  text-xl text-center text-primaryBlue mx-auto">
         <h3>Nome do médico</h3>
         <h3>Especialidade</h3>
         <h3>Realizar Consulta</h3>
       </div>
-      {data &&
-        data.map((medico: Medico, index: number) => (
-          <div
-            key={index}
-            className=" grid grid-cols-3 bg-gray-200 md:w-10/12 
+      <main className="px-1">
+        {data &&
+          data.map((medico: Medico, index: number) => (
+            <div
+              key={index}
+              className=" grid grid-cols-3 bg-gray-200 md:w-10/12 
                  items-center
                  my-3 mx-auto  rounded-lg text-center px-1 "
-          >
-            <h3>{medico["usuario.nome"]}</h3>
-            <h3 className="">{medico["especialidade.nome"]}</h3>
-            <ButtonComponent
-              className="border-2 md:w-1/2 self-center mx-auto border-primaryGreen"
-              type="submit"
-              onSubmit={() => {}}
             >
-              <h3>Agendar</h3>
-            </ButtonComponent>
-          </div>
-        ))}
+              <h3>{medico["usuario.nome"]}</h3>
+              <h3 className="">{medico["especialidade.nome"]}</h3>
+              <ButtonComponent
+                className="hover:border-0 md:w-1/2 self-center mx-auto border-primaryGreen"
+                type="submit"
+                onSubmit={() => {}}
+              >
+                <h3>Agendar</h3>
+              </ButtonComponent>
+            </div>
+          ))}
+      </main>
     </div>
   );
 }
