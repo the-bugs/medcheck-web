@@ -1,18 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import mobileIMG from "../assets/imgs/mobile_DoctorSearch.png";
 import desktopIMG from "../assets/imgs/desktop_DoctorSearch.png";
 import ButtonComponent from "./ui/ButtonComponent";
+import { useSpecialties } from "../utils/UseSpecialties";
 
 interface FormData {
   searchTerm: string;
-}
-
-interface Specialty {
-  id: number;
-  name: string;
 }
 
 export default function DoctorSearch(): JSX.Element {
@@ -21,32 +16,12 @@ export default function DoctorSearch(): JSX.Element {
 
     formState: { errors },
   } = useForm<FormData>();
+  const specialties = useSpecialties();
 
   const [selectedValue, setSelectedValue] = useState(
     "Selecione especialidade desejada"
   );
-  const [specialties, setSpecialties] = useState<Specialty[]>([]);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    async function getSpecialties(): Promise<void> {
-      try {
-        const response = await axios.get(
-          `http://localhost:3001/especialidades`
-        );
-
-        const specialtiesData: Specialty[] = response.data.map((item: any) => ({
-          id: item.id,
-          name: item.nome,
-        }));
-
-        setSpecialties(specialtiesData);
-      } catch (error) {
-        console.error("Erro na solicitação de especialidades:", error);
-      }
-    }
-    getSpecialties();
-  }, []);
 
   return (
     <div className="relative flex flex-col md:flex-col justify-center h-[500px]">
