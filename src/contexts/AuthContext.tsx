@@ -31,14 +31,17 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
   const navigate = useNavigate();
 
   const login = async (email: string, senha: string) => {
-    const port = "http://localhost:3001/";
     try {
-      
-      const response = await axios.post(`${port}auth/login`, {
-        email,
-        senha,
-      });
-      
+      const port = "http://localhost:3001";
+
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_HOST}/auth/login`,
+        {
+          email,
+          senha,
+        }
+      );
+
       // Salva no armazenamento local os dados do usuário.
       localStorage.setItem("authToken", response.data.access_token);
       localStorage.setItem("userInfo", JSON.stringify(response.data.user));

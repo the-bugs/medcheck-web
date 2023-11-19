@@ -1,4 +1,5 @@
 import ButtonComponent from "../components/ui/ButtonComponent";
+import StyledInput from "../components/ui/StyledInput";
 
 export default function UiComponents() {
   return (
@@ -52,6 +53,8 @@ export default function UiComponents() {
           Danger Button
         </ButtonComponent>
       </div>
+      <StyledInput placeholder="Input teste" label="Label teste" />
+      <div className="py-5"></div>
     </>
   );
 }
