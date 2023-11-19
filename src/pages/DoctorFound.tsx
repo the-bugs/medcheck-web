@@ -70,31 +70,30 @@ export default function DoctorFound(): JSX.Element {
         </div>
       </div>
       <h1 className="text-3xl text-primaryGreen my-8">Resultado</h1>
-      <div className="flex md:w-10/12 justify-between content-between text-xl text-center text-primaryBlue">
+      <div className="grid grid-cols-3 md:w-10/12  text-xl text-center text-primaryBlue mx-auto">
         <h3>Nome do médico</h3>
         <h3>Especialidade</h3>
         <h3>Realizar Consulta</h3>
       </div>
-      <main>
-        {data &&
-          data.map((medico: Medico, index: number) => (
-            <div
-              key={index}
-              className="flex bg-gray-200 md:w-10/12 
-                justify-between items-center my-3 rounded-lg px-1 md:px-2"
+      {data &&
+        data.map((medico: Medico, index: number) => (
+          <div
+            key={index}
+            className=" grid grid-cols-3 bg-gray-200 md:w-10/12 
+                 items-center
+                 my-3 mx-auto  rounded-lg text-center px-1 "
+          >
+            <h3>{medico["usuario.nome"]}</h3>
+            <h3 className="">{medico["especialidade.nome"]}</h3>
+            <ButtonComponent
+              className="border-2 md:w-1/2 self-center mx-auto border-primaryGreen"
+              type="submit"
+              onSubmit={() => {}}
             >
-              <h3>{medico["usuario.nome"]}</h3>
-              <h3>{medico["especialidade.nome"]}</h3>
-              <ButtonComponent
-                className="border-2 border-primaryGreen"
-                type="submit"
-                onSubmit={() => {}}
-              >
-                <h3>Agendar</h3>
-              </ButtonComponent>
-            </div>
-          ))}
-      </main>
+              <h3>Agendar</h3>
+            </ButtonComponent>
+          </div>
+        ))}
     </div>
   );
 }
