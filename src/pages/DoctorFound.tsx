@@ -70,7 +70,7 @@ export default function DoctorFound(): JSX.Element {
         </div>
       </div>
       <h1 className="text-3xl text-primaryGreen my-8">Resultado</h1>
-      <div className="flex md:w-10/12 justify-between content-between text-xl text-primaryBlue">
+      <div className="flex md:w-10/12 justify-between content-between text-xl text-center text-primaryBlue">
         <h3>Nome do médico</h3>
         <h3>Especialidade</h3>
         <h3>Realizar Consulta</h3>
@@ -81,7 +81,7 @@ export default function DoctorFound(): JSX.Element {
             <div
               key={index}
               className="flex bg-gray-200 md:w-10/12 
-                justify-between items-center my-3 rounded-lg px-2"
+                justify-between items-center my-3 rounded-lg px-1 md:px-2"
             >
               <h3>{medico["usuario.nome"]}</h3>
               <h3>{medico["especialidade.nome"]}</h3>
