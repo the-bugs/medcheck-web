@@ -5,9 +5,10 @@ import Root from "./pages/Root";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import UiComponents from "./pages/UiComponents";
-import ProtectedRoute from './utils/ProtectedRoute';
+import ProtectedRoute from "./utils/ProtectedRoute";
 import GlobalContext from "./contexts";
 import { Toaster } from "react-hot-toast";
+import DoctorFound from "./pages/DoctorFound";
 function App() {
   return (
     <BrowserRouter>
@@ -17,7 +18,20 @@ function App() {
             <Route path="/" index element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
-            <Route path="/uicomponents" element={<ProtectedRoute><UiComponents /></ProtectedRoute>} />
+            <Route
+              path="/uicomponents"
+              element={
+                <ProtectedRoute>
+                  <UiComponents />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/medicos/especialidades/:id"
+              element={<DoctorFound />}
+            />
+            {/* Seria bom add essa pg */}
+            <Route path="*" element={<h1>404</h1>} />{" "}
           </Route>
         </Routes>
       </GlobalContext>
