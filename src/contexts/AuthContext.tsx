@@ -44,11 +44,11 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
 
       // Salva no armazenamento local os dados do usuário.
       localStorage.setItem("authToken", response.data.access_token);
-      localStorage.setItem("userInfo", JSON.stringify(response.data.user));
       const token = localStorage.getItem("authToken");
-
+      
       if (token) {
         const decodedToken = jwtDecode<any>(token);
+        localStorage.setItem("userInfo", JSON.stringify(decodedToken));
         setUser(decodedToken);
       }
       navigate("/");
