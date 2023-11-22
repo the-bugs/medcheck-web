@@ -9,6 +9,7 @@ import ProtectedRoute from "./utils/ProtectedRoute";
 import GlobalContext from "./contexts";
 import { Toaster } from "react-hot-toast";
 import DoctorFound from "./pages/DoctorFound";
+import Medicos from "./pages/Medicos";
 function App() {
   return (
     <BrowserRouter>
@@ -30,6 +31,7 @@ function App() {
               path="/medicos/especialidades/:id"
               element={<DoctorFound />}
             />
+            <Route path="/medicos" element={<Medicos />} />
             {/* Seria bom add essa pg */}
             <Route path="*" element={<h1>404</h1>} />{" "}
           </Route>

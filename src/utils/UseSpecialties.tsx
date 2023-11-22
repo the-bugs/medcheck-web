@@ -13,7 +13,16 @@ export function useSpecialties() {
     async function getSpecialties(): Promise<void> {
       try {
         const response = await axios.get(
-          `http://localhost:3001/especialidades`
+          `http://localhost:3001/especialidades`,
+          {
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+              "Access-Control-Allow-Headers": "X-Requested-With, content-type",
+              "x-access-token": localStorage.getItem("authToken"),
+              Accept: "*/*",
+              "Content-Type": "application/json",
+            },
+          }
         );
 
         const specialtiesData: Specialty[] = response.data.map((item: any) => ({
