@@ -27,9 +27,13 @@ export default function ShowAgenda({ medico }: ShowAgendaProps): JSX.Element {
     setIsModalOpen(true);
 
     axios
-      .get(`${process.env.REACT_APP_API_HOST}/agendas/medicos/${medico.id}/`)
+      .get(`${process.env.REACT_APP_API_HOST}/agendas/medicos/${medico.id}/`, {
+        headers: {
+          'x-access-token': localStorage.getItem("authToken")
+        }
+      })
       .then((response) => {
-        console.log(response);
+        console.log(response.data);
       })
       .catch((error) => {
         console.error("Erro na solicitação:", error);
