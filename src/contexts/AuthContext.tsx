@@ -12,7 +12,7 @@ type UserType = {
 
 type AuthContextType = {
   user: UserType | null;
-  login: (username: string, senha: string) => void;
+  login: (username: string, password: string) => void;
   logout: () => void;
 };
 
@@ -28,20 +28,15 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
   const [user, setUser] = useState<UserType | null>(null);
   const navigate = useNavigate();
 
-  const login = async (email: string, senha: string) => {
+  const login = async (email: string, password: string) => {
     try {
       const port = "http://localhost:3001";
 
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_HOST}/auth/login`,
-        {
-          email,
-          senha,
-        }
-      );
-
-      // Save the user data in local storage
-      localStorage.setItem("authToken", response.data.access_token);
+      const response = await axios.post(`${port}/auth/login`, {
+        email,
+        password,
+      });
+      localStorage.setItem("authToken", response.data.auth_token);
       const token = localStorage.getItem("authToken");
 
       if (token) {
