@@ -1,12 +1,15 @@
 import { Link } from "react-router-dom";
 import logoFinal from "../assets/imgs/MEDICALCHECKLOGO.svg";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faTimes, faUser } from "@fortawesome/free-solid-svg-icons";
 import ButtonComponent from "./ui/ButtonComponent";
+import { AuthContext } from "../contexts/AuthContext";
 
 export default function Header(): JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
+  const authContext = useContext(AuthContext);
+
   const mobileNavClasses = `sm:hidden flex justify-between mt-8 mb-8 z-10 ${
     isOpen ? "fixed mt-0 mb-0" : ""
   }`;
@@ -15,6 +18,9 @@ export default function Header(): JSX.Element {
   }
   function handleCloseMenu(): void {
     setIsOpen(false);
+  }
+  function doLogout(): void {
+    authContext?.logout();
   }
 
   return (
@@ -72,14 +78,28 @@ export default function Header(): JSX.Element {
               className="hover:scale-105"
             />
           </Link>
-          <li className="bg-opacity-0">
-            <ButtonComponent variant={"third"}>
-              <Link to="/login">Login</Link>
-            </ButtonComponent>
-            <ButtonComponent variant={"primary"} className="w-32 opacity-90">
-              <Link to="/signup">Cadastrar</Link>
-            </ButtonComponent>
-          </li>
+          {!authContext?.user && (
+            <li className="bg-opacity-0">
+              <ButtonComponent variant={"third"}>
+                <Link to="/login">Login</Link>
+              </ButtonComponent>
+              <ButtonComponent variant={"primary"} className="w-32 opacity-90">
+                <Link to="/signup">Cadastrar</Link>
+              </ButtonComponent>
+            </li>
+          )}
+          {authContext?.user && (
+            <li className="bg-opacity-0">
+              <FontAwesomeIcon icon={faUser} size="2x" />
+              <ButtonComponent
+                variant={"danger"}
+                size={"small"}
+                onClick={() => doLogout()}
+              >
+                Logout
+              </ButtonComponent>
+            </li>
+          )}
         </ul>
       </nav>
     </header>

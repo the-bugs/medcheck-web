@@ -5,6 +5,7 @@ import mobileIMG from "../assets/imgs/mobile_DoctorSearch.png";
 import desktopIMG from "../assets/imgs/desktop_DoctorSearch.png";
 import ButtonComponent from "./ui/ButtonComponent";
 import { useSpecialties } from "../utils/UseSpecialties";
+import axios from "axios";
 
 interface FormData {
   searchTerm: string;

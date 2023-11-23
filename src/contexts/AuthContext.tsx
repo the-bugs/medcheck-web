@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { createContext, useState, ReactNode } from "react";
+import React, { createContext, useState, ReactNode, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
@@ -20,8 +20,6 @@ type AuthContextProviderProps = {
   children: ReactNode;
 };
 
-// Contexto para verificação de autenticação.
-//Para deslogado, o usuário é null. Para logado, o usuário é um objeto com nome e email.
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
@@ -42,15 +40,16 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
         }
       );
 
-      // Salva no armazenamento local os dados do usuário.
+      // Save the user data in local storage
       localStorage.setItem("authToken", response.data.access_token);
-      localStorage.setItem("userInfo", JSON.stringify(response.data.user));
       const token = localStorage.getItem("authToken");
 
       if (token) {
         const decodedToken = jwtDecode<any>(token);
+        localStorage.setItem("userInfo", JSON.stringify(decodedToken));
         setUser(decodedToken);
       }
+
       navigate("/");
     } catch (err) {
       console.log(err);
@@ -63,6 +62,16 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
     localStorage.removeItem("userInfo");
     navigate("/");
   };
+
+  // Checa se existe token no local storage
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+
+    if (token) {
+      const decodedToken = jwtDecode<any>(token);
+      setUser(decodedToken);
+    }
+  }, []);
 
   return (
     <AuthContext.Provider value={{ user, login, logout }}>
