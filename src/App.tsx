@@ -10,13 +10,14 @@ import GlobalContext from "./contexts";
 import { Toaster } from "react-hot-toast";
 import DoctorFound from "./pages/DoctorFound";
 import Medicos from "./pages/Medicos";
+import SpecialtiesMenuPage from "./pages/SpecialtiesMenuPage";
 function App() {
   return (
     <BrowserRouter>
       <GlobalContext>
         <Routes>
           <Route path="/" element={<Root />}>
-            <Route path="/" index element={<Home />} />
+            <Route index element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             <Route
@@ -32,8 +33,15 @@ function App() {
               element={<DoctorFound />}
             />
             <Route path="/medicos" element={<Medicos />} />
+            <Route
+              path="/menu/especialidades"
+              element={<SpecialtiesMenuPage />}
+            />
             {/* Seria bom add essa pg */}
-            <Route path="*" element={<h1>404</h1>} />{" "}
+            <Route
+              path="*"
+              element={<h1 className="mx-auto w-screen h-32 text-3xl">404</h1>}
+            />
           </Route>
         </Routes>
       </GlobalContext>

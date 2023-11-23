@@ -53,8 +53,6 @@ export default function UiComponents() {
           Danger Button
         </ButtonComponent>
       </div>
-      <StyledInput placeholder="Input teste" label="Label teste" />
-      <div className="py-5"></div>
     </>
   );
 }

@@ -9,9 +9,7 @@ import { AuthContext } from "../contexts/AuthContext";
 export default function Header(): JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
   const authContext = useContext(AuthContext);
-  const userInfo = localStorage.getItem("userInfo");
-  const userData = userInfo ? JSON.parse(userInfo) : false;
-  
+
   const mobileNavClasses = `sm:hidden flex justify-between mt-8 mb-8 z-10 ${
     isOpen ? "fixed mt-0 mb-0" : ""
   }`;
@@ -80,7 +78,7 @@ export default function Header(): JSX.Element {
               className="hover:scale-105"
             />
           </Link>
-          { !userData && (
+          {!authContext?.user && (
             <li className="bg-opacity-0">
               <ButtonComponent variant={"third"}>
                 <Link to="/login">Login</Link>
@@ -90,16 +88,18 @@ export default function Header(): JSX.Element {
               </ButtonComponent>
             </li>
           )}
-          {
-            userData &&(
-              <li className="bg-opacity-0">
-              <FontAwesomeIcon icon={faUser} size="2x"  />
-              <ButtonComponent variant={"danger"} size={'small'} onClick={()=> doLogout()}>
+          {authContext?.user && (
+            <li className="bg-opacity-0">
+              <FontAwesomeIcon icon={faUser} size="2x" />
+              <ButtonComponent
+                variant={"danger"}
+                size={"small"}
+                onClick={() => doLogout()}
+              >
                 Logout
               </ButtonComponent>
             </li>
-            )
-          }
+          )}
         </ul>
       </nav>
     </header>
