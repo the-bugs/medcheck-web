@@ -1,10 +1,13 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useSpecialties } from "../utils/UseSpecialties";
 import axios from "axios";
 import ButtonComponent from "../components/ui/ButtonComponent";
+import ShowAgenda from "../components/ShowAgenda";
+import { AuthContext } from "../contexts/AuthContext";
 
 interface Medico {
+  id: number;
   numeroRegistro: string;
   "usuario.nome": string;
   "especialidade.id": number;
@@ -16,6 +19,7 @@ export default function DoctorFound(): JSX.Element {
   const navigate = useNavigate();
 
   const { id } = useParams();
+  const authContext = useContext(AuthContext);
   const [selectedValue, setSelectedValue] = useState("");
   const [data, setData] = useState<Medico[]>([]);
 
@@ -73,7 +77,7 @@ export default function DoctorFound(): JSX.Element {
       <div className="grid grid-cols-3 md:w-10/12  text-xl text-center text-primaryBlue mx-auto">
         <h3>Nome do médico</h3>
         <h3>Especialidade</h3>
-        <h3>Realizar Consulta</h3>
+        <h3>Ver Agenda</h3>
       </div>
       <main className="px-1">
         {data &&
@@ -86,13 +90,14 @@ export default function DoctorFound(): JSX.Element {
             >
               <h3>{medico["usuario.nome"]}</h3>
               <h3 className="">{medico["especialidade.nome"]}</h3>
-              <ButtonComponent
-                className="hover:border-0 md:w-1/2 self-center mx-auto border-primaryGreen"
-                type="submit"
-                onSubmit={() => {}}
-              >
-                <h3>Agendar</h3>
-              </ButtonComponent>
+              {authContext?.user && <ShowAgenda medico={medico} />}
+              {!authContext?.user && (
+                <Link to="/login">
+                  <ButtonComponent className="md:w-1/2 justify-self-center">
+                    Login
+                  </ButtonComponent>
+                </Link>
+              )}
             </div>
           ))}
       </main>
