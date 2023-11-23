@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { useSpecialties } from "../utils/UseSpecialties";
 import axios from "axios";
 import ButtonComponent from "../components/ui/ButtonComponent";
-import ShowAgenda from "../components/ShowAgenda";
+import ShowAgendaAndMakeAppointment from "../components/ShowAgendaAndMakeAppointment";
 import { AuthContext } from "../contexts/AuthContext";
 
 interface Medico {
@@ -28,7 +28,6 @@ export default function DoctorFound(): JSX.Element {
       .get(`${process.env.REACT_APP_API_HOST}/medicos/especialidades/${id}`)
       .then((response) => {
         setData(response.data);
-        console.log(response.data);
       })
       .catch((error) => {
         console.error("Erro na solicitação:", error);
@@ -90,7 +89,9 @@ export default function DoctorFound(): JSX.Element {
             >
               <h3>{medico["usuario.nome"]}</h3>
               <h3 className="">{medico["especialidade.nome"]}</h3>
-              {authContext?.user && <ShowAgenda medico={medico} />}
+              {authContext?.user && (
+                <ShowAgendaAndMakeAppointment medico={medico} />
+              )}
               {!authContext?.user && (
                 <Link to="/login">
                   <ButtonComponent className="md:w-1/2 justify-self-center">
