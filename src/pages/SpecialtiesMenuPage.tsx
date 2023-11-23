@@ -12,14 +12,6 @@ export default function SpecialtiesMenuPage(): JSX.Element {
   const specialties = useSpecialties();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  if (!isAdmin) {
-    return (
-      <div className="w-full flex items-center justify-center h-screen text-center">
-        <p className="text-2xl">Sem permissão para acessar a página</p>
-      </div>
-    );
-  }
-
   return (
     <div className="w-screen box-border">
       <div className="my-8 flex justify-between">
