@@ -34,19 +34,19 @@ export default function SpecialtiesMenuPage(): JSX.Element {
         </ButtonComponent>
       </div>
       <div className="flex justify-around md:w-10/12 text-xl text-center text-primaryBlue mx-auto">
-        <h3>ID</h3>
-        <h3>Especialidade</h3>
+        <h3 className="w-1">ID</h3>
+        <h3 className="w-24">Especialidade</h3>
         <h3>Atualizar</h3>
         <h3>Excluir</h3>
       </div>
-      <main className="px-1">
+      <main className="">
         {specialties.map((specialty) => (
           <div
             key={specialty.id}
             className="flex my-2 mx-auto md:w-10/12 text-center items-center justify-around bg-gray-200 rounded-md"
           >
-            <h4 className="text-left">{specialty.id}</h4>
-            <h4>{specialty.name}</h4>
+            <h4 className="">{specialty.id}</h4>
+            <h4 className="text-center w-24">{specialty.name}</h4>
             <ButtonComponent
               className="mx-0 bg-opacity-70 border-2 border-primaryBlue px-2"
               variant={"secondary"}
